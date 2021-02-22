@@ -5,7 +5,6 @@ import qj.util.funct.F1;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -40,14 +39,9 @@ public class ReflectUtil {
 		}
 		if (!clazz.equals(Object.class)) {
 			Class superclass = clazz.getSuperclass();
-			if (superclass != null) {
-				return getMethod(methodName, superclass);
-			} else {
-				return null;
-			}
-		} else {
-			return null;
+			return superclass != null ? getMethod(methodName, superclass) : null;
 		}
+		return null;
 	}
 	
     public static Method getMethod(String methodName, Class[] paramClasses, Class<?> clazz) {
@@ -56,13 +50,9 @@ public class ReflectUtil {
         } catch (NoSuchMethodException e) {
             if (!clazz.equals(Object.class)) {
 				Class<?> superclass = clazz.getSuperclass();
-				if (superclass != null) {
-					return getMethod(methodName, paramClasses, superclass);
-				}
-				return null;
-			} else {
-				return null;
+				return superclass != null ? getMethod(methodName, paramClasses, superclass) : null;
 			}
+            return null;
         }
     }
 	
