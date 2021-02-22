@@ -25,6 +25,7 @@ public class StaticInt {
 		out.println();
 
 		User.age = 11;
+		// TO DO: how to manipulate another User instance loaded by customized class loader
 		out.println("And different age values:");
 		out.println((int) ReflectUtil.getStaticFieldValue("age", userClass1));
 		out.println((int) ReflectUtil.getStaticFieldValue("age", userClass2));
